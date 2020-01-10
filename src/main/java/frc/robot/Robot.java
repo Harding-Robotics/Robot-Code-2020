@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -41,7 +42,8 @@ public class Robot extends SampleRobot {
 //= new DifferentialDrive(new PWMVictorSPX(0), new PWMVictorSPX(1));
   private final MecanumDrive m_robotDrive
     = new MecanumDrive(new PWMVictorSPX(0), new PWMVictorSPX(1), new PWMVictorSPX(2), new PWMVictorSPX(3));
-  private final Joystick m_stick = new Joystick(0);
+  //private final Joystick m_stick = new Joystick(0);
+  private final XboxController m_stick = new XboxController(0);
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
   public Robot() {
@@ -145,8 +147,12 @@ public class Robot extends SampleRobot {
      // m_robotDrive.arcadeDrive(-m_stick.getY(), m_stick.getX()); 
      
      // todo - figure out how to get rotation from 2nd joystick
-     int rotation = 0;
-     m_robotDrive.driveCartesian(-m_stick.getY(), m_stick.getX(), m_stick.getZ());
+     double whatDoWeDoWithThisY = m_stick.getY(edu.wpi.first.wpilibj.GenericHID.Hand.kLeft);
+     double whatDoWeDoWithThisX = m_stick.getX(edu.wpi.first.wpilibj.GenericHID.Hand.kLeft);
+     System.out.printf("Left Joystick X is: %f and Y is: %f%n", whatDoWeDoWithThisX, whatDoWeDoWithThisY);
+     // System.out.print("printing");
+     double rotation = 0.0;
+     m_robotDrive.driveCartesian(-m_stick.getY(), m_stick.getX(), rotation);
 
       // The motors will be updated every 5ms
       Timer.delay(0.005);
