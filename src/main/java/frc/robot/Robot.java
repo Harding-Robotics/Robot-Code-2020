@@ -23,30 +23,31 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * call your Autonomous and OperatorControl methods at the right time as
  * controlled by the switches on the driver station or the field controls.
  *
- * <p>The VM is configured to automatically run this class, and to call the
+ * <p>
+ * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the SampleRobot
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the build.properties file in the
  * project.
  *
- * <p>WARNING: While it may look like a good choice to use for your code if
- * you're inexperienced, don't. Unless you know what you are doing, complex code
- * will be much more difficult under this system. Use TimedRobot or
- * Command-Based instead if you're new.
+ * <p>
+ * WARNING: While it may look like a good choice to use for your code if you're
+ * inexperienced, don't. Unless you know what you are doing, complex code will
+ * be much more difficult under this system. Use TimedRobot or Command-Based
+ * instead if you're new.
  */
 public class Robot extends SampleRobot {
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
 
-  //private final DifferentialDrive m_robotDrive
-//= new DifferentialDrive(new PWMVictorSPX(0), new PWMVictorSPX(1));
-  private final MecanumDrive m_robotDrive
-    = new MecanumDrive(new PWMVictorSPX(0), new PWMVictorSPX(1), new PWMVictorSPX(2), new PWMVictorSPX(3));
-  //private final Joystick m_stick = new Joystick(0);
+  // private final DifferentialDrive m_robotDrive
+  // = new DifferentialDrive(new PWMVictorSPX(0), new PWMVictorSPX(1));
+  private final MecanumDrive m_robotDrive = new MecanumDrive(new PWMVictorSPX(0), new PWMVictorSPX(1),
+      new PWMVictorSPX(2), new PWMVictorSPX(3));
+  // private final Joystick m_stick = new Joystick(0);
   private final XboxController m_stick = new XboxController(0);
   private final PWMVictorSPX motor_5 = new PWMVictorSPX(4);
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
-  
 
   public Robot() {
     m_robotDrive.setExpiration(0.1);
@@ -61,19 +62,24 @@ public class Robot extends SampleRobot {
 
   /**
    * This autonomous (along with the chooser code above) shows how to select
-   * between different autonomous modes using the dashboard. The sendable
-   * chooser code works with the Java SmartDashboard. If you prefer the
-   * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-   * getString line to get the auto name from the text box below the Gyro
+   * between different autonomous modes using the dashboard. The sendable chooser
+   * code works with the Java SmartDashboard. If you prefer the LabVIEW Dashboard,
+   * remove all of the chooser code and uncomment the getString line to get the
+   * auto name from the text box below the Gyro
    *
-   * <p>You can add additional auto modes by adding additional comparisons to
-   * the if-else structure below with additional strings. If using the
-   * SendableChooser make sure to add them to the chooser code above as well.
+   * <p>
+   * You can add additional auto modes by adding additional comparisons to the
+   * if-else structure below with additional strings. If using the SendableChooser
+   * make sure to add them to the chooser code above as well.
    *
-   * <p>If you wanted to run a similar autonomous mode with an TimedRobot
-   * you would write:
+   * <p>
+   * If you wanted to run a similar autonomous mode with an TimedRobot you would
+   * write:
    *
-   * <blockquote><pre>{@code
+   * <blockquote>
+   * 
+   * <pre>
+   * {@code
    * Timer timer = new Timer();
    *
    * // This function is run once each time the robot enters autonomous mode
@@ -93,7 +99,10 @@ public class Robot extends SampleRobot {
    *         myRobot.drive(0.0, 0.0); // stop robot
    *     }
    * }
-   * }</pre></blockquote>
+   * }
+   * </pre>
+   * 
+   * </blockquote>
    */
   @Override
   public void autonomous() {
@@ -108,66 +117,72 @@ public class Robot extends SampleRobot {
     m_robotDrive.setSafetyEnabled(false);
 
     switch (autoSelected) {
-      case kCustomAuto:
-        // Spin at half speed for two seconds
-       // m_robotDrive.arcadeDrive(0.0, 0.5);
-        Timer.delay(2.0);
+    case kCustomAuto:
+      // Spin at half speed for two seconds
+      // m_robotDrive.arcadeDrive(0.0, 0.5);
+      Timer.delay(2.0);
 
-        // Stop robot
-       // m_robotDrive.arcadeDrive(0.0, 0.0);
-        break;
-      case kDefaultAuto:
-      default:
-        // Drive forwards for two seconds
-       // m_robotDrive.arcadeDrive(-0.5, 0.0);
-        Timer.delay(2.0);
+      // Stop robot
+      // m_robotDrive.arcadeDrive(0.0, 0.0);
+      break;
+    case kDefaultAuto:
+    default:
+      // Drive forwards for two seconds
+      // m_robotDrive.arcadeDrive(-0.5, 0.0);
+      Timer.delay(2.0);
 
-        // Stop robot
-       // m_robotDrive.arcadeDrive(0.0, 0.0);
-        break;
+      // Stop robot
+      // m_robotDrive.arcadeDrive(0.0, 0.0);
+      break;
     }
   }
 
   /**
    * Runs the motors with arcade steering.
    *
-   * <p>If you wanted to run a similar teleoperated mode with an TimedRobot
-   * you would write:
+   * <p>
+   * If you wanted to run a similar teleoperated mode with an TimedRobot you would
+   * write:
    *
-   * <blockquote><pre>{@code
+   * <blockquote>
+   * 
+   * <pre>
+   * {@code
    * // This function is called periodically during operator control
    * public void teleopPeriodic() {
    *     myRobot.arcadeDrive(stick);
    * }
-   * }</pre></blockquote>
+   * }
+   * </pre>
+   * 
+   * </blockquote>
    */
   @Override
   public void operatorControl() {
     m_robotDrive.setSafetyEnabled(true);
     while (isOperatorControl() && isEnabled()) {
       // Drive arcade style
-     // m_robotDrive.arcadeDrive(-m_stick.getY(), m_stick.getX()); 
-     
-     // todo - figure out how to get rotation from 2nd joystick
-     double whatDoWeDoWithThisY = m_stick.getY(edu.wpi.first.wpilibj.GenericHID.Hand.kLeft);
-    
-     double rotation_x = m_stick.getX(edu.wpi.first.wpilibj.GenericHID.Hand.kLeft);
-     System.out.printf("Left Joystick X is: %f and Y is: %f%n", rotation_x, whatDoWeDoWithThisY);
-     // System.out.print("printing");
-     m_robotDrive.driveCartesian(-m_stick.getY(), m_stick.getX(), rotation_x);
+      // m_robotDrive.arcadeDrive(-m_stick.getY(), m_stick.getX());
 
-     if( m_stick.getXButton()) {
-       motor_5.setSpeed(1);
-    }
-     else { 
-       motor_5.setSpeed(0); 
-      };
+      // todo - figure out how to get rotation from 2nd joystick
+      double whatDoWeDoWithThisY = m_stick.getY(edu.wpi.first.wpilibj.GenericHID.Hand.kRight);
 
+      double rotation_x = m_stick.getX(edu.wpi.first.wpilibj.GenericHID.Hand.kRight);
+      System.out.printf("Right Joystick X is: %f and Y is: %f%n", rotation_x, whatDoWeDoWithThisY);
+      // System.out.print("printing");
+      m_robotDrive.driveCartesian(-m_stick.getY(edu.wpi.first.wpilibj.GenericHID.Hand.kLeft),
+          m_stick.getX(edu.wpi.first.wpilibj.GenericHID.Hand.kLeft), rotation_x);
 
+      // Drive shooter motot, X button on game controller is used. Motor runs while
+      // X Button is pressed.
+      if (m_stick.getXButton()) {
+        motor_5.setSpeed(1);
+      } else {
+        motor_5.setSpeed(0);
+      }
+      ;
 
-     //motor_5.setSpeed(1);
-
-
+      // motor_5.setSpeed(1);
 
       // The motors will be updated every 5ms
       Timer.delay(0.005);
