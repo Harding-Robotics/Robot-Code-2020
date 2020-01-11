@@ -148,11 +148,11 @@ public class Robot extends SampleRobot {
      
      // todo - figure out how to get rotation from 2nd joystick
      double whatDoWeDoWithThisY = m_stick.getY(edu.wpi.first.wpilibj.GenericHID.Hand.kLeft);
-     double whatDoWeDoWithThisX = m_stick.getX(edu.wpi.first.wpilibj.GenericHID.Hand.kLeft);
-     System.out.printf("Left Joystick X is: %f and Y is: %f%n", whatDoWeDoWithThisX, whatDoWeDoWithThisY);
+    
+     double rotation_x = m_stick.getX(edu.wpi.first.wpilibj.GenericHID.Hand.kLeft);
+     System.out.printf("Left Joystick X is: %f and Y is: %f%n", rotation_x, whatDoWeDoWithThisY);
      // System.out.print("printing");
-     double rotation = 0.0;
-     m_robotDrive.driveCartesian(-m_stick.getY(), m_stick.getX(), rotation);
+     m_robotDrive.driveCartesian(-m_stick.getY(), m_stick.getX(), rotation_x);
 
       // The motors will be updated every 5ms
       Timer.delay(0.005);
