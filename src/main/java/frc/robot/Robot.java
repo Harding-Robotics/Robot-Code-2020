@@ -44,7 +44,9 @@ public class Robot extends SampleRobot {
     = new MecanumDrive(new PWMVictorSPX(0), new PWMVictorSPX(1), new PWMVictorSPX(2), new PWMVictorSPX(3));
   //private final Joystick m_stick = new Joystick(0);
   private final XboxController m_stick = new XboxController(0);
+  private final PWMVictorSPX motor_5 = new PWMVictorSPX(4);
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  
 
   public Robot() {
     m_robotDrive.setExpiration(0.1);
@@ -153,6 +155,19 @@ public class Robot extends SampleRobot {
      System.out.printf("Left Joystick X is: %f and Y is: %f%n", rotation_x, whatDoWeDoWithThisY);
      // System.out.print("printing");
      m_robotDrive.driveCartesian(-m_stick.getY(), m_stick.getX(), rotation_x);
+
+     if( m_stick.getXButton()) {
+       motor_5.setSpeed(1);
+    }
+     else { 
+       motor_5.setSpeed(0); 
+      };
+
+
+
+     //motor_5.setSpeed(1);
+
+
 
       // The motors will be updated every 5ms
       Timer.delay(0.005);
