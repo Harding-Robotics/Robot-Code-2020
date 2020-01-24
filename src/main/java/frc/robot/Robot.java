@@ -15,7 +15,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.util.*;
+//import edu.wpi.first.wpilibj.util.*;
+import edu.wpi.first.wpilibj.DriverStation;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -104,7 +105,7 @@ public class Robot extends TimedRobot {
     // double whatDoWeDoWithThisY =
     // m_stick.getY(edu.wpi.first.wpilibj.GenericHID.Hand.kRight);
 
-    double rotation_x = m_stick.getX(edu.wpi.first.wpilibj.GenericHID.Hand.kRight);
+    final double rotation_x = m_stick.getX(edu.wpi.first.wpilibj.GenericHID.Hand.kRight);
     // System.out.printf("Right Joystick X is: %f and Y is: %f%n", rotation_x,
     // whatDoWeDoWithThisY);
     // System.out.print("printing");
@@ -121,7 +122,39 @@ public class Robot extends TimedRobot {
 
     System.out.println("Color_sensor: Red: " + Color_sensor.getRed() + " green: " + Color_sensor.getGreen() + " blue: "
         + Color_sensor.getBlue());
+  
+  String gameData;
+  gameData = DriverStation.getInstance().getGameSpecificMessage();
+  if(gameData.length() > 0)
+  
+  {
+    switch (gameData(0))
+  {
+    case 'B' :
+      //Blue case code
+      break;
+    case 'G' :
+      //Green case code
+      break;
+    case 'R' :
+      //Red case code
+      break;
+    case 'Y' :
+      //Yellow case code
+      break;
+    default :
+      //This is corrupt data
+      break;
   }
+} else {
+  //Code for no data received yet
+}
+  }
+  
+  private int gameData(int i) {
+    return 0;
+  }
+
 
   /**
    * This function is called periodically during test mode.
